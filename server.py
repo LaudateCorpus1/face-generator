@@ -80,7 +80,7 @@ while True:
             if len(vector) != 512:
                 raise Exception('Input vector must be length 512, floating point numbers.')
 
-            zlatents = [vector]
+            zlatents = np.array([vector])
 
         images = make_images(model, zlatents)
         print('Made random in %f seconds.' % (time.time() - time_start))
