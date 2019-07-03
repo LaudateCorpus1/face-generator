@@ -9,10 +9,12 @@ WORKDIR /model
 
 RUN wget https://deepai-opensource-codebases-models.s3-us-west-2.amazonaws.com/artbreeder/karras2019stylegan-ffhq-1024x1024.pkl
 
-RUN pip3 install Flask==1.0.3 Pillow==6.1.0 requests==2.22.0 Flask-Cors==3.0.8
+RUN pip3 install Flask==1.0.3 Pillow==6.1.0 requests==2.22.0 Flask-Cors==3.0.8 ai-integration==1.0.7
 
 
 
 COPY server.py config.json ./
 COPY dnnlib ./dnnlib
 
+CMD []
+ENTRYPOINT ["python3", "server.py"]
