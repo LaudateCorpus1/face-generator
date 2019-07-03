@@ -52,6 +52,9 @@ def random_zlatents(model, num):
 while True:
     with ai_integration.get_next_input(inputs_schema={
         # no inputs yet
+        'latent_vector': {
+            'type': 'text'
+        }
     }) as inputs_dict:
 
         # only update the negative fields if we reach the end of the function - then update successfully
@@ -65,7 +68,20 @@ while True:
         time_start = time.time()
         num = 1
         model = 'celebhq'
-        zlatents = random_zlatents(model, num)
+
+        if inputs_dict['latent_vector'] == 'random':
+
+            # generate new random vector
+            zlatents = random_zlatents(model, num)
+        else:
+            # use passed vector
+            vector = json.loads(inputs_dict['latent_vector'])
+
+            if len(vector) != 512:
+                raise Exception('Input vector must be length 512, floating point numbers.')
+
+            zlatents = [vector]
+
         images = make_images(model, zlatents)
         print('Made random in %f seconds.' % (time.time() - time_start))
         result_data["content-type"] = 'image/jpeg'
