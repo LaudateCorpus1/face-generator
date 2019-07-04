@@ -69,7 +69,7 @@ while True:
         num = 1
         model = 'celebhq'
 
-        if inputs_dict['latent_vector'] == 'random':
+        if inputs_dict['latent_vector'] == 'random' or inputs_dict['latent_vector'] == b'random':
 
             # generate new random vector
             zlatents = random_zlatents(model, num)
